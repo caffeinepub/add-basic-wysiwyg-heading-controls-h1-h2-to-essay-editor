@@ -1,0 +1,52 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-07T23:43:10.002Z",
+  "summary": "Diff implements heading levels (H1/H2) across backend schema, frontend editor controls, rendering, markdown export, and includes a backend migration to preserve old data. Some additional unrelated changes (auth hook behavior, global CSS typography/prose styling, and project metadata file) appear beyond the BuildRequest.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Added project metadata/tracking file not requested (project_state.json with AR-* items).",
+      "reason": "BuildRequest does not mention adding project state/feature request tracking files.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "description": "Modified actor/identity hook behavior to invalidate/refetch queries when actor changes.",
+      "reason": "BuildRequest scope is WYSIWYG heading controls and related rich-text schema/render/export; query invalidation/refetch behavior changes are not requested.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "Broader Internet Identity provider/auth-client option changes (e.g., idleOptions defaults, derivationOrigin wiring).",
+      "reason": "BuildRequest explicitly lists auth changes as non-goals beyond Internet Identity; these modifications are not required for heading controls.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts"
+      ]
+    },
+    {
+      "description": "Extensive global typography/prose CSS styling adjustments beyond just ensuring headings render as h1/h2.",
+      "reason": "REQ-3 requires correct HTML tags/styling based on level, but the diff introduces broad styling changes across multiple elements that are not explicitly requested.",
+      "evidence": [
+        "frontend/src/index.css"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/components/RichTextRenderer.tsx",
+    "frontend/src/components/admin/EssayEditor.tsx",
+    "frontend/src/components/admin/PageEditor.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/markdownExport.ts",
+    "frontend/src/main.tsx",
+    "project_state.json"
+  ]
+}

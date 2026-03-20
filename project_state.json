@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "New project",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-extend-the-essay-rich-text-model-to-support-heading-levels-at-minimum-h1-and-h2-so-that-an-essay-block-can-be-rendered-stored-distinctly-as-an-h1-vs-h2-heading",
+      "title": "Extend the Essay rich-text model to support heading levels (at minimum H1 and H2) so that an essay block can be rendered/stored distinctly as an H1 vs H2 heading.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-admin-essay-editor-toolbar-to-provide-wysiwyg-controls-for-h1-and-h2-headings-in-addition-to-the-existing-bold-italic-controls-allowing-the-user-to-convert-the-current-paragraph-or-selected-block-into-an-h1-or-h2-heading-and-back-to-a-paragraph",
+      "title": "Update the admin Essay editor toolbar to provide WYSIWYG controls for H1 and H2 headings in addition to the existing Bold/Italic controls, allowing the user to convert the current paragraph (or selected block) into an H1 or H2 heading and back to a paragraph.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-richtext-rendering-to-display-heading-blocks-using-the-correct-html-heading-tag-and-styling-based-on-the-stored-heading-level-h1-renders-as-h1-h2-renders-as-h2",
+      "title": "Update RichText rendering to display heading blocks using the correct HTML heading tag and styling based on the stored heading level (H1 renders as <h1>, H2 renders as <h2>).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-markdown-export-to-emit-the-correct-number-of-leading-characters-for-headings-based-on-heading-level-h1-h2",
+      "title": "Update Markdown export to emit the correct number of leading '#' characters for headings based on heading level (H1 -> '#', H2 -> '##').",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add basic WYSIWYG/rich-text editing for Essays (bold, italic, H1/H2, etc.)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add a state migration for existing canister data if required by the heading-level schema change, ensuring upgrade does not trap and existing essays/pages remain accessible.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Add basic WYSIWYG heading controls (H1/H2) to Essay editor",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

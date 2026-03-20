@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode colors using OKLCH */
+    --background: oklch(98% 0.01 240);
+    --foreground: oklch(20% 0.02 240);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(20% 0.02 240);
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(20% 0.02 240);
+    --primary: oklch(35% 0.08 240);
+    --primary-foreground: oklch(98% 0.01 240);
+    --secondary: oklch(92% 0.02 240);
+    --secondary-foreground: oklch(20% 0.02 240);
+    --muted: oklch(94% 0.02 240);
+    --muted-foreground: oklch(50% 0.02 240);
+    --accent: oklch(92% 0.02 240);
+    --accent-foreground: oklch(20% 0.02 240);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(98% 0.01 240);
+    --border: oklch(88% 0.02 240);
+    --input: oklch(88% 0.02 240);
+    --ring: oklch(35% 0.08 240);
+    --radius: 0.5rem;
+    --success: oklch(60% 0.15 145);
+    --warning: oklch(70% 0.15 70);
+  }
+
+  .dark {
+    /* Dark mode colors using OKLCH */
+    --background: oklch(15% 0.02 240);
+    --foreground: oklch(95% 0.01 240);
+    --card: oklch(18% 0.02 240);
+    --card-foreground: oklch(95% 0.01 240);
+    --popover: oklch(18% 0.02 240);
+    --popover-foreground: oklch(95% 0.01 240);
+    --primary: oklch(75% 0.12 240);
+    --primary-foreground: oklch(15% 0.02 240);
+    --secondary: oklch(25% 0.02 240);
+    --secondary-foreground: oklch(95% 0.01 240);
+    --muted: oklch(25% 0.02 240);
+    --muted-foreground: oklch(65% 0.02 240);
+    --accent: oklch(25% 0.02 240);
+    --accent-foreground: oklch(95% 0.01 240);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(95% 0.01 240);
+    --border: oklch(30% 0.02 240);
+    --input: oklch(30% 0.02 240);
+    --ring: oklch(75% 0.12 240);
+    --success: oklch(60% 0.15 145);
+    --warning: oklch(70% 0.15 70);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Typography enhancements */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl;
+  }
+  
+  h2 {
+    @apply text-2xl;
+  }
+  
+  h3 {
+    @apply text-xl;
+  }
+}
+
+/* Prose styling for essay content */
+@layer components {
+  .prose {
+    @apply text-foreground;
+  }
+  
+  .prose h1 {
+    @apply text-4xl font-bold mb-6 mt-10 text-foreground;
+  }
+  
+  .prose h2 {
+    @apply text-2xl font-bold mb-4 mt-8 text-foreground;
+  }
+  
+  .prose h3 {
+    @apply text-xl font-bold mb-3 mt-6 text-foreground;
+  }
+  
+  .prose p {
+    @apply mb-4 leading-relaxed text-foreground;
+  }
+  
+  .prose a {
+    @apply text-primary hover:underline;
+  }
+  
+  .prose strong {
+    @apply font-bold text-foreground;
+  }
+  
+  .prose em {
+    @apply italic;
+  }
+  
+  .prose code {
+    @apply bg-muted px-1 py-0.5 rounded text-sm;
+  }
+  
+  .prose pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto my-6;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-border pl-4 italic my-6 text-muted-foreground;
+  }
+  
+  .prose ul {
+    @apply list-disc list-inside mb-4 space-y-2;
+  }
+  
+  .prose ol {
+    @apply list-decimal list-inside mb-4 space-y-2;
+  }
+  
+  .prose img {
+    @apply rounded-lg my-8;
+  }
+}
+
+/* Essay-specific content styling */
+.essay-content {
+  @apply prose prose-neutral dark:prose-invert max-w-none;
+  @apply text-lg leading-relaxed;
+}
+
+.essay-content h1 {
+  @apply text-4xl font-bold mb-6 mt-10;
+}
+
+.essay-content h2 {
+  @apply text-2xl font-bold mb-4 mt-8;
+}
+
+.essay-content h3 {
+  @apply text-xl font-semibold mb-3 mt-6;
+}
+
+.essay-content p {
+  @apply mb-6;
+}
+
+.essay-content a {
+  @apply text-blue-600 dark:text-blue-400 hover:underline;
+}

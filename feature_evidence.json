@@ -1,0 +1,87 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-extend-the-essay-rich-text-model-to-support-heading-levels-at-minimum-h1-and-h2-so-that-an-essay-block-can-be-rendered-stored-distinctly-as-an-h1-vs-h2-heading",
+      "featureTitle": "Extend the Essay rich-text model to support heading levels (at minimum H1 and H2) so that an essay block can be rendered/stored distinctly as an H1 vs H2 heading.",
+      "files": [
+        "frontend/src/components/RichTextRenderer.tsx",
+        "frontend/src/components/admin/EssayEditor.tsx"
+      ],
+      "components": [
+        "authorization@3.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-admin-essay-editor-toolbar-to-provide-wysiwyg-controls-for-h1-and-h2-headings-in-addition-to-the-existing-bold-italic-controls-allowing-the-user-to-convert-the-current-paragraph-or-selected-block-into-an-h1-or-h2-heading-and-back-to-a-paragraph",
+      "featureTitle": "Update the admin Essay editor toolbar to provide WYSIWYG controls for H1 and H2 headings in addition to the existing Bold/Italic controls, allowing the user to convert the current paragraph (or selected block) into an H1 or H2 heading and back to a paragraph.",
+      "files": [
+        "frontend/src/components/admin/EssayEditor.tsx"
+      ],
+      "components": [
+        "authorization@3.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-richtext-rendering-to-display-heading-blocks-using-the-correct-html-heading-tag-and-styling-based-on-the-stored-heading-level-h1-renders-as-h1-h2-renders-as-h2",
+      "featureTitle": "Update RichText rendering to display heading blocks using the correct HTML heading tag and styling based on the stored heading level (H1 renders as <h1>, H2 renders as <h2>).",
+      "files": [
+        "frontend/src/components/RichTextRenderer.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "authorization@3.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-markdown-export-to-emit-the-correct-number-of-leading-characters-for-headings-based-on-heading-level-h1-h2",
+      "featureTitle": "Update Markdown export to emit the correct number of leading '#' characters for headings based on heading level (H1 -> '#', H2 -> '##').",
+      "files": [
+        "frontend/src/lib/markdownExport.ts"
+      ],
+      "components": [
+        "authorization@3.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

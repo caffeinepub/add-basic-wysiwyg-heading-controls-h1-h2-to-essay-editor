@@ -1,0 +1,109 @@
+{
+  "kind": "build_request",
+  "title": "Add basic WYSIWYG heading controls (H1/H2) to Essay editor",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Extend the Essay rich-text model to support heading levels (at minimum H1 and H2) so that an essay block can be rendered/stored distinctly as an H1 vs H2 heading.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-15"
+        ],
+        "quotes": [
+          "ok ad some basic wysiwyg functionality for the Essays. I want to be able to make things bold, italic. h1/h2 etc."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend RichText heading blocks can represent at least two levels (H1 and H2) without losing information on save/load.",
+        "Existing persisted essays/pages that contain heading blocks remain readable after upgrade and default to a sensible heading level (e.g., H2 or H1) when level is missing.",
+        "Frontend types generated/consumed from the backend reflect the new heading-level capability (no TypeScript type errors)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Update the admin Essay editor toolbar to provide WYSIWYG controls for H1 and H2 headings in addition to the existing Bold/Italic controls, allowing the user to convert the current paragraph (or selected block) into an H1 or H2 heading and back to a paragraph.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-15"
+        ],
+        "quotes": [
+          "I want to be able to make things bold, italic. h1/h2 etc."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Essay editor UI includes explicit H1 and H2 controls alongside the existing formatting buttons.",
+        "Using H1/H2 controls updates the internal RichText representation used when saving (not just a visual preview).",
+        "Toggling heading level off returns the block to a normal paragraph.",
+        "No regression to existing bold/italic behavior (buttons and Ctrl/Cmd+B / Ctrl/Cmd+I still work as before)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Update RichText rendering to display heading blocks using the correct HTML heading tag and styling based on the stored heading level (H1 renders as <h1>, H2 renders as <h2>).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-15"
+        ],
+        "quotes": [
+          "h1/h2 etc."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Published essays render heading blocks using <h1> for level 1 and <h2> for level 2 (and do not render all headings as the same level).",
+        "Heading rendering remains compatible with existing content that has headings created before this change (defaults to a consistent level)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Update Markdown export to emit the correct number of leading '#' characters for headings based on heading level (H1 -> '#', H2 -> '##').",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-15"
+        ],
+        "quotes": [
+          "h1/h2 etc."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Exported markdown uses '# ' for H1 headings and '## ' for H2 headings.",
+        "Exported markdown for essays created before this change remains valid and uses a sensible default level for headings without an explicit level."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add a state migration for existing canister data if required by the heading-level schema change, ensuring upgrade does not trap and existing essays/pages remain accessible.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-15"
+        ],
+        "quotes": [
+          "h1/h2 etc."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Canister upgrade succeeds without trapping due to type/schema mismatch.",
+        "Existing stored RichText heading blocks are migrated or interpreted with a default heading level so they continue to render and export correctly."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional canisters/services).",
+    "Do not edit files under frontend immutablePaths (compose existing UI components instead).",
+    "Use English for any user-facing text."
+  ],
+  "nonGoals": [
+    "Implement a full-featured rich-text editor framework (e.g., ProseMirror/Slate/Tiptap) with complex behaviors like nested lists, tables, mentions, or collaborative editing.",
+    "Add new authentication methods beyond Internet Identity.",
+    "Add realtime/multiplayer editing."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

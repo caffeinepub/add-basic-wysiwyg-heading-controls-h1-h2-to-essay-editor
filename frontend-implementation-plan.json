@@ -1,0 +1,80 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add H1/H2 heading levels to Essay rich-text editor, renderer, and Markdown export",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Extend the frontend RichText handling to preserve and round-trip heading levels (H1/H2) when loading/saving essays.",
+      "acceptanceCriteria": [
+        "Backend RichText heading blocks can represent at least two levels (H1 and H2) without losing information on save/load.",
+        "Existing persisted essays/pages that contain heading blocks remain readable after upgrade and default to a sensible heading level (e.g., H2 or H1) when level is missing.",
+        "Frontend types generated/consumed from the backend reflect the new heading-level capability (no TypeScript type errors)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/EssayEditor.tsx",
+          "operation": "modify",
+          "description": "Update RichText<->plain-text conversion to encode heading level using distinct markers (e.g., '# ' for H1, '## ' for H2) and decode them back into heading blocks with an explicit heading level; include a defensive default (e.g., H2) when a loaded heading block lacks a level (older data)."
+        },
+        {
+          "path": "frontend/src/components/RichTextRenderer.tsx",
+          "operation": "modify",
+          "description": "Add defensive handling for legacy heading blocks that may not include a level at runtime by defaulting to a consistent level (e.g., H2) during render-time normalization, ensuring older saved content remains readable without runtime errors."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add H1 and H2 toolbar controls to the admin Essay editor to toggle the current block between paragraph/H1/H2 while preserving existing bold/italic behaviors and shortcuts.",
+      "acceptanceCriteria": [
+        "Essay editor UI includes explicit H1 and H2 controls alongside the existing formatting buttons.",
+        "Using H1/H2 controls updates the internal RichText representation used when saving (not just a visual preview).",
+        "Toggling heading level off returns the block to a normal paragraph.",
+        "No regression to existing bold/italic behavior (buttons and Ctrl/Cmd+B / Ctrl/Cmd+I still work as before)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/admin/EssayEditor.tsx",
+          "operation": "modify",
+          "description": "Extend the toolbar UI to include explicit H1 and H2 controls next to Bold/Italic; implement block-level toggling by adding/removing/updating the heading marker at the start of the current block (split by blank lines), and correctly shifting bold/italic/link ranges when marker length changes so saved RichText matches the user's intent; keep existing Bold/Italic buttons and Ctrl/Cmd+B / Ctrl/Cmd+I behavior unchanged."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Render heading blocks as semantic <h1>/<h2> with styling based on stored heading level, with sensible fallback for legacy headings.",
+      "acceptanceCriteria": [
+        "Published essays render heading blocks using <h1> for level 1 and <h2> for level 2 (and do not render all headings as the same level).",
+        "Heading rendering remains compatible with existing content that has headings created before this change (defaults to a consistent level)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/RichTextRenderer.tsx",
+          "operation": "modify",
+          "description": "Update heading rendering to switch on the stored heading level and render semantic <h1> vs <h2> with appropriate classes; when level is missing at runtime (older content), default to a consistent level (e.g., H2) so older essays render consistently."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Ensure global prose/essay typography covers both H1 and H2 (not only H2/H3) so the new <h1> output has intentional sizing/spacing consistent with the existing design system."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Export Markdown headings with correct '#' count according to heading level, with defaulting for legacy headings.",
+      "acceptanceCriteria": [
+        "Exported markdown uses '# ' for H1 headings and '## ' for H2 headings.",
+        "Exported markdown for essays created before this change remains valid and uses a sensible default level for headings without an explicit level."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/markdownExport.ts",
+          "operation": "modify",
+          "description": "Update Markdown conversion for heading blocks to emit '# ' for H1 and '## ' for H2 based on stored heading level, and default to a consistent level (e.g., H2) if a heading block lacks an explicit level (older content)."
+        }
+      ]
+    }
+  ]
+}
